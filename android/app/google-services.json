@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "102230415574",
+    "project_id": "tutionnotes-78ef3",
+    "storage_bucket": "tutionnotes-78ef3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102230415574:android:dce49f8d13c9dc72805177",
+        "android_client_info": {
+          "package_name": "com.example.tution_notes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw8y2mOl_5xmDiiaLZmQUuTtCZAjClz8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
