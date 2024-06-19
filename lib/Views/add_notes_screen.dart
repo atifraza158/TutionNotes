@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:random_string/random_string.dart';
 import 'package:tution_notes/Controllers/firestore_controller.dart';
+import 'package:tution_notes/Views/Dashboard/dashboard.dart';
 import 'package:tution_notes/Views/Utils/app_colors/app_colors.dart';
 import 'package:tution_notes/Views/Utils/app_text/app_text.dart';
 import 'package:tution_notes/Views/Utils/common_button.dart';
 import 'package:tution_notes/Views/Utils/common_field.dart';
-import 'package:tution_notes/Views/all_notes_screen.dart';
 
 class AddNotesScreen extends StatefulWidget {
   AddNotesScreen({super.key});
@@ -26,7 +26,6 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
   FirestoreController firestoreController = Get.put(FirestoreController());
   var dropdownValue = '';
   final key = GlobalKey<FormState>();
- 
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,6 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
                   title: 'Associate with Subject',
                   color: AppColors.grey,
                 ),
-               
                 SizedBox(height: 20),
                 CommonTextField(
                   controller: notesTitleController,
@@ -181,7 +179,7 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
                 .addData(notesDetails, id, 'Notes')
                 .then((_) => {
                       Get.snackbar('Success', 'Note Saved Successfully'),
-                      Get.off(() => AllNotesScreen()),
+                      Get.off(() => Dashboard()),
                     });
           },
         ),
@@ -222,6 +220,4 @@ class _AddNotesScreenState extends State<AddNotesScreen> {
       }
     } catch (e) {}
   }
-
- 
 }

@@ -152,7 +152,7 @@ class _AllSubjectsScreenState extends State<AllSubjectsScreen> {
       ),
       floatingActionButton: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary_color,
+          backgroundColor: AppColors.linear_gradient1,
           foregroundColor: AppColors.white,
         ),
         onPressed: () {

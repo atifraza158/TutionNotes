@@ -27,99 +27,102 @@ class _AllNotesScreenState extends State<AllNotesScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('Subjects').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<QueryDocumentSnapshot> subjects = snapshot.data!.docs;
-                  if (selectedSubjectId.isEmpty) {
-                    selectedSubjectId = subjects.first.id;
-                  }
-                  return Column(
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: subjects.map((subject) {
-                            return GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedSubjectId = subject.id;
-                                });
-                                FirebaseFirestore.instance
-                                    .collection('Subjects')
-                                    .where('id', isEqualTo: subject.id)
-                                    .get()
-                                    .then((querySnapshot) {
-                                  List<QueryDocumentSnapshot> notes =
-                                      querySnapshot.docs;
-                                  return NoteCard(notes: notes);
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 14),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                    color: subject.id == selectedSubjectId
-                                        ? AppColors.primary_color
-                                        : AppColors.white,
-                                    borderRadius: BorderRadius.circular(28),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        subject['subject_name'],
-                                        style: subject.id == selectedSubjectId
-                                            ? TextStyle(
-                                                color: AppColors.white,
-                                                fontSize: 11,
-                                              )
-                                            : TextStyle(
-                                                color: AppColors.black,
-                                                fontSize: 11),
-                                      )
-                                    ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('Subjects')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<QueryDocumentSnapshot> subjects = snapshot.data!.docs;
+                    if (selectedSubjectId.isEmpty) {
+                      selectedSubjectId = subjects.first.id;
+                    }
+                    return Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: subjects.map((subject) {
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedSubjectId = subject.id;
+                                  });
+                                  FirebaseFirestore.instance
+                                      .collection('Subjects')
+                                      .where('id', isEqualTo: subject.id)
+                                      .get()
+                                      .then((querySnapshot) {
+                                    List<QueryDocumentSnapshot> notes =
+                                        querySnapshot.docs;
+                                    return NoteCard(notes: notes);
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 14),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      color: subject.id == selectedSubjectId
+                                          ? AppColors.primary_color
+                                          : AppColors.white,
+                                      borderRadius: BorderRadius.circular(28),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          subject['subject_name'],
+                                          style: subject.id == selectedSubjectId
+                                              ? TextStyle(
+                                                  color: AppColors.white,
+                                                  fontSize: 11,
+                                                )
+                                              : TextStyle(
+                                                  color: AppColors.black,
+                                                  fontSize: 11),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
+                              );
+                            }).toList(),
+                          ),
                         ),
-                      ),
-                      // Display the items in a GridView
-                      StreamBuilder(
-                        stream: FirebaseFirestore.instance
-                            .collection('Notes')
-                            .where('subject', isEqualTo: selectedSubjectId)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            List<QueryDocumentSnapshot> notes =
-                                snapshot.data!.docs;
+                        // Display the items in a GridView
+                        StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection('Notes')
+                              .where('subject', isEqualTo: selectedSubjectId)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              List<QueryDocumentSnapshot> notes =
+                                  snapshot.data!.docs;
 
-                            return NoteCard(notes: notes);
-                          } else {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                        },
-                      ),
-                    ],
-                  );
-                } else {
-                  return Center(
-                      child: CircularProgressIndicator(
-                    color: AppColors.primary_color,
-                  ));
-                }
-              },
-            )
-          ],
+                              return NoteCard(notes: notes);
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: AppColors.primary_color,
+                    ));
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

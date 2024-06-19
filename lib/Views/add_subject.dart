@@ -33,6 +33,14 @@ class _AddSubjectState extends State<AddSubject> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20),

@@ -66,9 +66,10 @@ class SubjectCardData2 extends StatelessWidget {
   }
 
   List colors = [
-    AppColors.grey,
-    Colors.lightGreen,
+    // AppColors.grey,
+    // Colors.lightGreen,
     AppColors.linear_gradient1,
-    AppColors.linear_gradient2,
+    // AppColors.linear_gradient2,
+    Color(0xffB19470)
   ];
 }
