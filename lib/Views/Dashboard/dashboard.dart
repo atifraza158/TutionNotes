@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tution_notes/Views/Utils/app_colors/app_colors.dart';
 import 'package:tution_notes/Views/all_notes_screen.dart';
 import 'package:tution_notes/Views/home_screen.dart';
 import 'package:tution_notes/Views/profile_screen.dart';
@@ -29,6 +30,8 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       body: pages[currentTab],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: AppColors.primary_color,
+        unselectedItemColor: AppColors.grey,
         currentIndex: currentTab,
         onTap: changeTab,
         items: [

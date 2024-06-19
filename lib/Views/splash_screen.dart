@@ -27,11 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.primary_color,
       body: Center(
-        child: AppText(
-          title: "StudyScript",
-          color: AppColors.white,
-          size: 35,
-          fontWeight: FontWeight.w600,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppText(
+              title: "StudyScript",
+              color: AppColors.white,
+              size: 32,
+              fontWeight: FontWeight.w500,
+            ),
+            AppText(
+              title: 'Your Study Mate',
+              color: AppColors.grey,
+            ),
+          ],
         ),
       ),
     );

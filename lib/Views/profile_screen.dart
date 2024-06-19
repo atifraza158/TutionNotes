@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tution_notes/Controllers/firebase_auth_controller.dart';
 import 'package:tution_notes/Views/Utils/app_colors/app_colors.dart';
 import 'package:tution_notes/Views/Utils/app_text/app_text.dart';
 
@@ -14,6 +16,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   User? currentUser;
   String? userName;
+  FirebaseController controller = Get.put(FirebaseController());
   checkUser() {
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {
@@ -81,13 +84,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: AppColors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(255, 229, 229, 229),
-                            spreadRadius: 0.4,
-                            blurRadius: 5,
-                            offset: Offset(
-                              0,
-                              3,
-                            ),
+                            color: AppColors.greyWithLowOpacity,
+                            blurRadius: 4,
+                            offset: Offset(0, 8),
                           ),
                         ],
                       ),
@@ -165,7 +164,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       color: AppColors.white,
                     ),
                     'Logout',
-                    onPress: () {},
+                    onPress: () {
+                      controller.logOut();
+                    },
                   ),
                 ],
               ),
