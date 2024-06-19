@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tution_notes/Views/AuthScreens/login_screen.dart';
-import 'package:tution_notes/Views/home_screen.dart';
+import 'package:tution_notes/Views/Dashboard/dashboard.dart';
 
 class CheckAuth extends StatelessWidget {
   const CheckAuth({super.key});
@@ -12,7 +12,7 @@ class CheckAuth extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return HomeScreen();
+          return Dashboard();
           // final User? user = snapshot.data;
           // final String uid = user!.uid;
           // final FirebaseFirestore firestore = FirebaseFirestore.instance;
